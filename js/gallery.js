@@ -4,14 +4,14 @@ var searchBox = document.getElementById('search');
 searchBox.value = defaultText;
 
 
-function printPhoto(photos) {
-    console.log(photos.name);
-}
+var photoDisplay =
+  document.createElement('div');
+  photoDisplay.className = 'main_gallery';
 
-function list() {
-    var photosLength = [];
-    for (i = 0; i < photos.length; i++) {
-        printPhoto(photos[i]);
-    }
+for (var i =0; i < photos.length; i++) {
+  var photoThumb = document.createElement('img');
+  console.log(photoThumb);
+  photoThumb.src = photos[i].thumbnail;
+  photoDisplay.appendChild(photoThumb);
 }
-list();
+document.body.appendChild(photoDisplay);

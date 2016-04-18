@@ -38,7 +38,7 @@ a {
 
 img {
   max-width: 100%;
-  width: 100%; /* Add width to fix Firefox/Safari image scaling issue */
+  width: 100%;  Add width to fix Firefox/Safari image scaling issue
 }
 
 
@@ -55,8 +55,13 @@ ____________________________________________________________________*/
 }
 
 .gallery {
-
+/*  width: 200px;
+  height: 200px;*/
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
 
 
 /*___________________________________________________________________
@@ -69,6 +74,11 @@ ____________________________________________________________________*/
 
 /* ----- Gallery Photos ----- */
 
+.main_gallery img {
+  margin: 0 30px 60px;
+  width: 200px;
+  height: 200px;
+}
 
 
 /*___________________________________________________________________
