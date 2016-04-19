@@ -54,16 +54,6 @@ ____________________________________________________________________*/
   padding: 0 .5em;
 }
 
-.gallery {
-/*  width: 200px;
-  height: 200px;*/
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-
-
 /*___________________________________________________________________
     Page Elements
 ____________________________________________________________________*/
@@ -74,7 +64,15 @@ ____________________________________________________________________*/
 
 /* ----- Gallery Photos ----- */
 
-.main_gallery img {
+.gallery ul {
+  margin: 0 10%;
+}
+
+.gallery li {
+  display: inline;
+}
+
+.gallery img {
   margin: 0 30px 60px;
   width: 200px;
   height: 200px;
