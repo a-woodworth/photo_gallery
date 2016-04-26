@@ -35,6 +35,7 @@ input[type="text"] {
 
 a {
   text-decoration: none;
+  color: #428bca;
 }
 
 img {
@@ -83,6 +84,11 @@ ____________________________________________________________________*/
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+.photo_thumbnail:hover {
+  border: 1px solid #428bca;
+}
+
 
 
 /*___________________________________________________________________
