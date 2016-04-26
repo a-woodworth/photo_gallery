@@ -1,8 +1,21 @@
-// Add search capability -- still needs work
-// var defaultText = 'Search';
-var searchBox = document.getElementById('search');
-// Default text after load
-// searchBox.value = defaultText;
+// Add search capability -- working but not the greatest -- fix later
+$(function() {
+  var image = $('#gallery img').each(function() {
+    $(this).prop('alt').toLowerCase();
+  });
+});
+
+$('#search').on('keyup', function() {
+  var query = $(this).val().toLowerCase();
+    $('#gallery img').each(function(){
+      //console.log(query);
+      if ( $(this).prop('alt').indexOf(query) >= 0 || query.length < 1 ) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+});
 
 // Create list to display all photo thumbnails
 var photoDisplay =
@@ -34,3 +47,21 @@ for (var i = 0; i < photos.length; i++) {
 }
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
