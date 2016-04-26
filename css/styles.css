@@ -64,15 +64,15 @@ ____________________________________________________________________*/
 
 /* ----- Gallery Photos ----- */
 
-.gallery ul {
+#gallery ul {
   margin: 0 10%;
 }
 
-.gallery li {
+#gallery li {
   display: inline;
 }
 
-.gallery img {
+#gallery img {
   margin: 0 30px 60px;
   width: 200px;
   height: 200px;
