@@ -4,6 +4,7 @@ ____________________________________________________________________*/
 
 * {
   box-sizing: border-box;
+  /*border: 1px solid red;*/
 }
 
 body {
@@ -68,14 +69,19 @@ ____________________________________________________________________*/
   margin: 0 10%;
 }
 
-#gallery li {
+.photo_list_item {
   display: inline;
 }
 
-#gallery img {
+.photo_thumbnail {
   margin: 0 30px 60px;
+  display: inline-block;
   width: 200px;
-  height: 200px;
+  height: auto;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 
