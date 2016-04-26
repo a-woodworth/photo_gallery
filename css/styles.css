@@ -70,12 +70,12 @@ ____________________________________________________________________*/
 }
 
 .photo_list_item {
-  display: inline;
+  display: inline-block;
+  margin: 0 30px 60px;
 }
 
 .photo_thumbnail {
-  margin: 0 30px 60px;
-  display: inline-block;
+  display: block;
   width: 200px;
   height: auto;
   padding: 4px;
