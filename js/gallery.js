@@ -23,4 +23,4 @@ for (var i = 0; i < photos.length; i++) {
   photoDisplay.appendChild(photoList);
 }
 // Add list to existing gallery div
-document.querySelector('.gallery').appendChild(photoDisplay);
+document.querySelector('#gallery').appendChild(photoDisplay);
