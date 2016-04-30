@@ -10,9 +10,9 @@ $('#search').on('keyup', function() {
     $('#gallery img').each(function(){
       //console.log(query);
       if ( $(this).prop('alt').indexOf(query) >= 0 || query.length < 1 ) {
-        $(this).show();
+        $(this).parent().parent().show();
       } else {
-        $(this).hide();
+        $(this).parent().parent().hide();
       }
     });
 });
