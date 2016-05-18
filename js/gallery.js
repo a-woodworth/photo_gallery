@@ -20,7 +20,7 @@ $('#search').on('keyup', function() {
 // Create list to display all photo thumbnails
 var photoDisplay =
   document.createElement('ul');
-  photoDisplay.className = 'photo_list';
+  photoDisplay.id = 'photo_list';
 
 for (var i = 0; i < photos.length; i++) {
   var photoList = document.createElement('li');
@@ -30,11 +30,9 @@ for (var i = 0; i < photos.length; i++) {
   var photoThumb = document.createElement('img');
   photoThumb.className = 'photo_thumbnail';
   photoThumb.src = 'Photos/Thumbnails/' + photos[i].thumbnail;
-  photoThumb.alt =  'Photo name: ' + photos[i].name +
-                    '. Photo description: ' + photos[i].caption;
+  photoThumb.alt =  photos[i].caption;
   //console.log(photoThumb);
 
-// Add link to get fullsize image for lightbox display
   var photoLink = document.createElement('a');
   photoLink.className = 'view_photo';
   photoLink.setAttribute('href', 'Photos/' + photos[i].image);
@@ -48,20 +46,37 @@ for (var i = 0; i < photos.length; i++) {
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
 
+var $overlay = $('<div id="overlay"></div>');
+var $img = $('<img>');
+var $caption = $('<p></p>');
 
+//An image and caption to overlay
+$overlay.height($(document).height());
+$overlay.append($img);
+$overlay.append($caption);
 
+//Add overlay
+$('body').append($overlay);
 
+//Click the thumbnail and display full-size image
+  $('#photo_list a').click(function(event) {
+    event.preventDefault();
+    var imageLocation = $(this).attr('href');
+    var captionText = $(this).children('img').attr('alt');
 
+  //Update overlay with the image linked in the link
+  $img.attr('src', imageLocation);
+  $caption.text(captionText);
 
+  //Show the overlay
+  $overlay.show();
+  var current = $(window).scrollTop();
+    $(window).scroll(function() {
+    $(window).scrollTop(current);
+  });
+});
 
-
-
-
-
-
-
-
-
-
-
-
+$('#overlay').click(function() {
+  $('#overlay').hide();
+  $(window).off('scroll');
+});
