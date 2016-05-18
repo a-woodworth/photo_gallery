@@ -51,7 +51,6 @@ var $img = $('<img>');
 var $caption = $('<p></p>');
 
 //An image and caption to overlay
-$overlay.height($(document).height());
 $overlay.append($img);
 $overlay.append($caption);
 
