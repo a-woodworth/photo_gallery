@@ -1,3 +1,11 @@
+// Variables for overlay
+var $overlay = $('<div id="overlay"></div>');
+var $img = $('<img>');
+var $caption = $('<p></p>');
+
+
+//=============== Search Function ===============
+
 // Add search capability -- working but not the greatest -- fix later
 $(function() {
   var image = $('#gallery img').each(function() {
@@ -17,6 +25,9 @@ $('#search').on('keyup', function() {
     });
 });
 
+
+//=============== Create Gallery ===============
+
 // Create list to display all photo thumbnails
 var photoDisplay =
   document.createElement('ul');
@@ -26,7 +37,7 @@ for (var i = 0; i < photos.length; i++) {
   var photoList = document.createElement('li');
   photoList.className = 'photo_list_item';
 
-// Add thumbnail images with name and caption for alt description
+// Add thumbnail images with caption for alt description
   var photoThumb = document.createElement('img');
   photoThumb.className = 'photo_thumbnail';
   photoThumb.src = 'Photos/Thumbnails/' + photos[i].thumbnail;
@@ -46,11 +57,10 @@ for (var i = 0; i < photos.length; i++) {
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
 
-var $overlay = $('<div id="overlay"></div>');
-var $img = $('<img>');
-var $caption = $('<p></p>');
 
-//An image and caption to overlay
+//=============== Overlay/Lightbox ===============
+
+//Add image and caption to overlay
 $overlay.append($img);
 $overlay.append($caption);
 
@@ -75,6 +85,7 @@ $('body').append($overlay);
   });
 });
 
+//Remove overlay
 $('#overlay').click(function() {
   $('#overlay').hide();
   $(window).off('scroll');
