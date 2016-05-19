@@ -8,7 +8,7 @@ var $caption = $('<p></p>');
 
 // Add search capability
 $(function() {
-  var image = $('#gallery img').each(function() {
+  $('#gallery img').each(function() {
     $(this).prop('alt').toLowerCase();
   });
 });
