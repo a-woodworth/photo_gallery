@@ -6,7 +6,7 @@ var $caption = $('<p></p>');
 
 //=============== Search Function ===============
 
-// Add search capability -- working but not the greatest -- fix later
+// Add search capability
 $(function() {
   var image = $('#gallery img').each(function() {
     $(this).prop('alt').toLowerCase();
@@ -17,7 +17,8 @@ $('#search').on('keyup', function() {
   var query = $(this).val().toLowerCase();
     $('#gallery img').each(function(){
       //console.log(query);
-      if ( $(this).prop('alt').indexOf(query) >= 0 || query.length < 1 ) {
+      if ( $(this).prop('alt').toLowerCase().indexOf(query) >= 0 ||
+          query.length < 1 ) {
         $(this).parent().parent().show();
       } else {
         $(this).parent().parent().hide();
