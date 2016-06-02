@@ -106,12 +106,14 @@ ____________________________________________________________________*/
 }
 
 #overlay img {
-  max-width: 80%;
-  margin-top: 25%;
+  max-width: 800px;
+  max-height: 600px;
+  margin: 5% 0 60px;
 }
 
 #overlay p {
-  margin: 30px 10%;
+  margin-top: -2.5%;
+  max-width: 600px;
   padding: 0 2.75em;
   justify-content: center;
   color: white;
@@ -122,36 +124,26 @@ ____________________________________________________________________*/
 }
 
 
-
 /*___________________________________________________________________
     Media Queries
 ____________________________________________________________________*/
 
-/* ----- Tablet ----- */
 
-@media screen and (min-width: 768px) {
+/* ----- Tablets ----- */
 
-  #overlay img {
-    max-width: 65%;
-    margin-top: 20%;
-  }
+@media screen and (min-width: 769px) {
 
   #overlay p {
-    max-width: 600px;
-    margin: 30px 20%;
+    margin: 10px 20%;
+    padding: 0;
   }
 }
-
 
 /* ----- Laptop/Desktop ----- */
 
 @media screen and (min-width: 1024px) {
-  #overlay img {
-    max-width: 55%;
-    margin-top: 10%;
-  }
 
   #overlay p {
-    margin: 30px 30%;
+    margin: 10px 30%;
   }
 }

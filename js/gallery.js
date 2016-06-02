@@ -1,7 +1,13 @@
 // Variables for overlay
 var $overlay = $('<div id="overlay"></div>');
+var $close =
+  $("<button id='close'><i class='fa fa-close fa-2x close'></i></button>");
 var $img = $('<img>');
 var $caption = $('<p></p>');
+var $arrowLeft =
+  $('<button><i id="#arrow_left"class="fa fa-chevron-left fa-2x"></i></button>');
+var $arrowRight =
+  $('<button><i id="#arrow_right"class="fa fa-chevron-right fa-2x"></i></button>');
 
 
 //=============== Search Function ===============
@@ -58,28 +64,48 @@ for (var i = 0; i < photos.length; i++) {
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
 
-
 //=============== Overlay/Lightbox ===============
 
-//Add image and caption to overlay
+// Add image and caption to overlay
 $overlay.append($img);
 $overlay.append($caption);
 
-//Add overlay
+// Add arrows to overlay
+// $overlay.append($arrowLeft);
+// $overlay.append($arrowRight);
+
+// Add close button to overlay
+// $overlay.append($close);
+
+// Add overlay
 $('body').append($overlay);
 
-//Click the thumbnail and display full-size image
-  $('#photo_list a').click(function(event) {
-    event.preventDefault();
-    var imageLocation = $(this).attr('href');
-    var captionText = $(this).children('img').attr('alt');
+// Click the thumbnail and display full-size image
+$('#photo_list a').click(function(event) {
+  event.preventDefault();
+  var imageLocation = $(this).attr('href');
+
+  // Add class to image shown on overlay
+  var currentImage = $(this);
+  currentImage.addClass('selected');
+
+  // Add caption
+  var captionText = $(this).children('img').attr('alt');
 
   //Update overlay with the image linked in the link
-  $img.attr('src', imageLocation);
+  $img.attr('src', imageLocation).fadeIn('slow');
   $caption.text(captionText);
+
+  // Position image
+  $img.position({
+    my: 'left top',
+    at: 'left top',
+    of: '#overlay'
+  });
 
   //Show the overlay
   $overlay.show();
+
   var current = $(window).scrollTop();
     $(window).scroll(function() {
     $(window).scrollTop(current);
@@ -87,7 +113,7 @@ $('body').append($overlay);
 });
 
 //Remove overlay
-$('#overlay').click(function() {
+$overlay.click(function() {
   $('#overlay').hide();
   $(window).off('scroll');
 });
