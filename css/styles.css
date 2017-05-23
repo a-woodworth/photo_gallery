@@ -103,24 +103,58 @@ ____________________________________________________________________*/
   left: 0;
   display: none;
   box-sizing: border-box;
+  padding-top: 100px;
 }
 
 #overlay img {
   max-width: 800px;
   max-height: 600px;
-  margin: 5% 0 60px;
 }
 
 #overlay p {
-  margin-top: -2.5%;
-  max-width: 600px;
-  padding: 0 2.75em;
-  justify-content: center;
+  position: absolute;
   color: white;
   font-size: 1em;
   font-weight: 700;
   text-align: left;
+  margin: 50px 15%;
+  max-width: 600px;
+}
+
+#modal {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 800px;
+}
+
+#close {
+  background: #000;
+  border: 1px solid #fff;
+  color: white;
   position: absolute;
+  border-radius: 50%;
+  width: 30px;
+  top: -15px;
+  right: -15px;
+}
+
+.previous, .next {
+  position: absolute;
+  top: 50%;
+  /*left: -50px;*/
+  width: auto;
+/*  padding: 16px;
+  margin-top: -50px;*/
+  color: #fff;
+  /*transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;*/
+}
+
+.next {
+  right: 0;
+  /*border-radius: 3px 0 0 3px;*/
 }
 
 
@@ -133,17 +167,17 @@ ____________________________________________________________________*/
 
 @media screen and (min-width: 769px) {
 
-  #overlay p {
+/*  #overlay p {
     margin: 10px 20%;
     padding: 0;
-  }
+  }*/
 }
 
 /* ----- Laptop/Desktop ----- */
 
 @media screen and (min-width: 1024px) {
 
-  #overlay p {
+/*  #overlay p {
     margin: 10px 30%;
-  }
+  }*/
 }

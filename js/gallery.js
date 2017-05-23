@@ -1,13 +1,15 @@
 // Variables for overlay
 var $overlay = $('<div id="overlay"></div>');
-var $close =
-  $("<button id='close'><i class='fa fa-close fa-2x close'></i></button>");
+var $modal = $('<div id="modal"></div>');
+// var $content = $('<div id="content"></>');
+var $close_btn =
+  $("<button id='close'><i class='fa fa-times' aria-hidden='true'></i></i></button>");
+//   var $arrowLeft =
+//   $('<button class="previous"><i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i></button>');
+// var $arrowRight =
+//   $('<button class="next"><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
-var $arrowLeft =
-  $('<button><i id="#arrow_left"class="fa fa-chevron-left fa-2x"></i></button>');
-var $arrowRight =
-  $('<button><i id="#arrow_right"class="fa fa-chevron-right fa-2x"></i></button>');
 
 
 //=============== Search Function ===============
@@ -67,15 +69,16 @@ document.querySelector('#gallery').appendChild(photoDisplay);
 //=============== Overlay/Lightbox ===============
 
 // Add image and caption to overlay
-$overlay.append($img);
-$overlay.append($caption);
-
-// Add arrows to overlay
-// $overlay.append($arrowLeft);
-// $overlay.append($arrowRight);
+$overlay.append($modal);
+$modal.append($img);
+$modal.append($caption);
 
 // Add close button to overlay
-// $overlay.append($close);
+$modal.append($close_btn);
+
+// Add arrows to overlay
+// $modal.append($arrowLeft);
+// $modal.append($arrowRight);
 
 // Add overlay
 $('body').append($overlay);
@@ -95,13 +98,6 @@ $('#photo_list a').click(function(event) {
   //Update overlay with the image linked in the link
   $img.attr('src', imageLocation).fadeIn('slow');
   $caption.text(captionText);
-
-  // Position image
-  $img.position({
-    my: 'left top',
-    at: 'left top',
-    of: '#overlay'
-  });
 
   //Show the overlay
   $overlay.show();
