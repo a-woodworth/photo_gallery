@@ -61,9 +61,6 @@ ____________________________________________________________________*/
 ____________________________________________________________________*/
 
 
-/* ----- Search Box ----- */
-
-
 /* ----- Gallery Photos ----- */
 
 #gallery ul {
@@ -129,33 +126,50 @@ ____________________________________________________________________*/
   max-width: 800px;
 }
 
+/* ----- Buttons ----- */
+
 #close {
-  background: #000;
-  border: 1px solid #fff;
-  color: white;
   position: absolute;
-  border-radius: 50%;
-  width: 30px;
   top: -15px;
   right: -15px;
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: white;
+  width: 30px;
+  cursor: pointer;
 }
 
 .previous, .next {
   position: absolute;
   top: 50%;
-  /*left: -50px;*/
   width: auto;
-/*  padding: 16px;
-  margin-top: -50px;*/
+  padding: 1em;
+  margin-top: -30px;
   color: #fff;
-  /*transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;*/
+  background-color: transparent;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  transition: 0.6s ease;
+}
+
+.previous {
+  left: 0;
 }
 
 .next {
   right: 0;
-  /*border-radius: 3px 0 0 3px;*/
+  border-radius: 3px 0 0 3px;
 }
+
+.previous:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 
 /*___________________________________________________________________

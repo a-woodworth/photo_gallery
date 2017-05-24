@@ -1,13 +1,12 @@
 // Variables for overlay
 var $overlay = $('<div id="overlay"></div>');
 var $modal = $('<div id="modal"></div>');
-// var $content = $('<div id="content"></>');
 var $close_btn =
   $("<button id='close'><i class='fa fa-times' aria-hidden='true'></i></i></button>");
-//   var $arrowLeft =
-//   $('<button class="previous"><i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i></button>');
-// var $arrowRight =
-//   $('<button class="next"><i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i></button>');
+  var $arrowLeft =
+  $('<button class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>');
+var $arrowRight =
+  $('<button class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
 
@@ -68,6 +67,9 @@ document.querySelector('#gallery').appendChild(photoDisplay);
 
 //=============== Overlay/Lightbox ===============
 
+// Add overlay
+$('body').append($overlay);
+
 // Add image and caption to overlay
 $overlay.append($modal);
 $modal.append($img);
@@ -77,11 +79,8 @@ $modal.append($caption);
 $modal.append($close_btn);
 
 // Add arrows to overlay
-// $modal.append($arrowLeft);
-// $modal.append($arrowRight);
-
-// Add overlay
-$('body').append($overlay);
+$modal.append($arrowLeft);
+$modal.append($arrowRight);
 
 // Click the thumbnail and display full-size image
 $('#photo_list a').click(function(event) {
@@ -95,11 +94,11 @@ $('#photo_list a').click(function(event) {
   // Add caption
   var captionText = $(this).children('img').attr('alt');
 
-  //Update overlay with the image linked in the link
+  // Update overlay with the image linked in the link
   $img.attr('src', imageLocation).fadeIn('slow');
   $caption.text(captionText);
 
-  //Show the overlay
+  // Show the overlay
   $overlay.show();
 
   var current = $(window).scrollTop();
@@ -109,7 +108,10 @@ $('#photo_list a').click(function(event) {
 });
 
 //Remove overlay
-$overlay.click(function() {
+$close_btn.click(function() {
   $('#overlay').hide();
   $(window).off('scroll');
 });
+
+
+
