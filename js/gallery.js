@@ -9,6 +9,9 @@ var $arrowRight =
   $('<button class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
+var imageLocation;
+var currentImage;
+var captionText;
 
 
 //=============== Search Function ===============
@@ -53,7 +56,6 @@ for (var i = 0; i < photos.length; i++) {
   //console.log(photoThumb);
 
   var photoLink = document.createElement('a');
-  photoLink.className = 'view_photo';
   photoLink.setAttribute('href', 'Photos/' + photos[i].image);
   //console.log(photoLink);
 
@@ -64,6 +66,7 @@ for (var i = 0; i < photos.length; i++) {
 }
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
+
 
 //=============== Overlay/Lightbox ===============
 
@@ -82,17 +85,18 @@ $modal.append($close_btn);
 $modal.append($arrowLeft);
 $modal.append($arrowRight);
 
+
 // Click the thumbnail and display full-size image
 $('#photo_list a').click(function(event) {
   event.preventDefault();
-  var imageLocation = $(this).attr('href');
+  imageLocation = $(this).attr('href');
 
   // Add class to image shown on overlay
-  var currentImage = $(this);
+  currentImage = $(this);
   currentImage.addClass('selected');
 
   // Add caption
-  var captionText = $(this).children('img').attr('alt');
+  captionText = $(this).children('img').attr('alt');
 
   // Update overlay with the image linked in the link
   $img.attr('src', imageLocation).fadeIn('slow');
@@ -101,17 +105,39 @@ $('#photo_list a').click(function(event) {
   // Show the overlay
   $overlay.show();
 
-  var current = $(window).scrollTop();
+  var display = $(window).scrollTop();
     $(window).scroll(function() {
-    $(window).scrollTop(current);
+    $(window).scrollTop(display);
   });
 });
 
-//Remove overlay
+// Remove overlay
 $close_btn.click(function() {
   $('#overlay').hide();
   $(window).off('scroll');
 });
 
+//  Activate arrows to cycle through images
+$arrowRight.on('click', function() {
+  $(currentImage).removeClass('selected');
+  nextImage = $(currentImage).parent().next();
+  nextImage.addClass('selected');
+  imageLocation = $(nextImage).find('a').attr('href');
+  captionText = $(nextImage).find('a').attr('alt');
+  $img.attr('src', imageLocation).fadeIn('slow');
+  $caption.text(captionText);
+});
 
+$arrowLeft.on('click', function() {
+  $(currentImage).removeClass('selected');
+  prevImage = $(currentImage).parent().prev();
+  prevImage.addClass('selected');
+  imageLocation = $(prevImage).find('a').attr('href');
+  captionText = $(prevImage).find('a').attr('alt');
+  $img.attr('src', imageLocation).fadeIn('slow');
+  $caption.text(captionText);
+});
 
+function selectedImage(currentImage) {
+
+}
