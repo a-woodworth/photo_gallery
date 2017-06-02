@@ -89,11 +89,12 @@ $modal.append($arrowRight);
 // Click the thumbnail and display full-size image
 $('#photo_list a').click(function(event) {
   event.preventDefault();
+
   imageLocation = $(this).attr('href');
 
   // Add class to image shown on overlay
   currentImage = $(this);
-  currentImage.addClass('selected');
+  currentImage.parent().addClass('active');
 
   // Add caption
   captionText = $(this).children('img').attr('alt');
@@ -117,27 +118,18 @@ $close_btn.click(function() {
   $(window).off('scroll');
 });
 
-//  Activate arrows to cycle through images
-$arrowRight.on('click', function() {
-  $(currentImage).removeClass('selected');
-  nextImage = $(currentImage).parent().next();
-  nextImage.addClass('selected');
-  imageLocation = $(nextImage).find('a').attr('href');
-  captionText = $(nextImage).find('a').attr('alt');
-  $img.attr('src', imageLocation).fadeIn('slow');
-  $caption.text(captionText);
+// Go to next overlay image
+$arrowRight.click(function() {
+  var current = $('.photo_list_item');
+  current.removeClass('active');
+  currentImage.closest('.photo_list_item').next().find('img').trigger('click');
+
 });
 
+// Go to previous overlay image
 $arrowLeft.on('click', function() {
-  $(currentImage).removeClass('selected');
-  prevImage = $(currentImage).parent().prev();
-  prevImage.addClass('selected');
-  imageLocation = $(prevImage).find('a').attr('href');
-  captionText = $(prevImage).find('a').attr('alt');
-  $img.attr('src', imageLocation).fadeIn('slow');
-  $caption.text(captionText);
+  var current = $('.photo_list_item');
+  current.removeClass('active');
+  currentImage.closest('.photo_list_item').prev().find('img').trigger('click');
 });
 
-function selectedImage(currentImage) {
-
-}
