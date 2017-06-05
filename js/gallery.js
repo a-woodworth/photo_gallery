@@ -12,6 +12,11 @@ var $caption = $('<p></p>');
 var imageLocation;
 var currentImage;
 var captionText;
+var imageCache;
+var index;
+var nextImage;
+var prevImage;
+var searchResults;
 
 
 //=============== Search Function ===============
@@ -24,16 +29,19 @@ $(function() {
 });
 
 $('#search').on('keyup', function() {
+  searchResults = [];
   var query = $(this).val().toLowerCase();
     $('#gallery img').each(function(){
-      //console.log(query);
+      console.log(query);
       if ( $(this).prop('alt').toLowerCase().indexOf(query) >= 0 ||
           query.length < 1 ) {
-        $(this).parent().parent().show();
+        $(this).parent().parent().show().addClass('search_results');
+        searchResults.push(this.closest('li'));
       } else {
         $(this).parent().parent().hide();
       }
     });
+  return searchResults;
 });
 
 
@@ -90,11 +98,17 @@ $modal.append($arrowRight);
 $('#photo_list a').click(function(event) {
   event.preventDefault();
 
-  imageLocation = $(this).attr('href');
+  // Add class to current image container shown on overlay
+  currentImage = $(this).closest('li').addClass('active');
 
-  // Add class to image shown on overlay
-  currentImage = $(this);
-  currentImage.parent().addClass('active');
+  // Cache all images
+  imageCache = $('#gallery li') //.toArray();
+
+  // Get index position
+  index = $(imageCache).filter('.active').index();
+
+  // Find current image path
+  imageLocation = $(this).attr('href');
 
   // Add caption
   captionText = $(this).children('img').attr('alt');
@@ -120,16 +134,31 @@ $close_btn.click(function() {
 
 // Go to next overlay image
 $arrowRight.click(function() {
-  var current = $('.photo_list_item');
-  current.removeClass('active');
-  currentImage.closest('.photo_list_item').next().find('img').trigger('click');
+  $(currentImage).removeClass('active');
 
+  // If last image, go to first image
+  if (index === (imageCache.length - 1)) {
+    nextImage = $(imageCache[0]).closest('li').find('img').trigger('click');
+    index = 0;
+  }
+  else {
+    index = index + 1;
+    nextImage = $(imageCache[index]).find('img').trigger('click');
+  }
+  currentImage = $(imageCache).filter('.active');
 });
 
 // Go to previous overlay image
 $arrowLeft.on('click', function() {
-  var current = $('.photo_list_item');
-  current.removeClass('active');
-  currentImage.closest('.photo_list_item').prev().find('img').trigger('click');
-});
+  $(currentImage).removeClass('active');
 
+  // If first image, go to last image
+  if (index === 0) {
+    prevImage = $(imageCache[imageCache.length - 1]).find('img').trigger('click');
+    index = imageCache.length - 1;
+  }
+  else {
+    index = index - 1;
+    prevImage = $(imageCache[index]).closest('li').find('img').trigger('click');
+  }
+});
