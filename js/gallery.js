@@ -133,7 +133,7 @@ $close_btn.click(function() {
 });
 
 // Go to next overlay image
-$arrowRight.click(function() {
+$arrowRight.on('click', function() {
   $(currentImage).removeClass('active');
 
   // If last image, go to first image
@@ -162,3 +162,4 @@ $arrowLeft.on('click', function() {
     prevImage = $(imageCache[index]).closest('li').find('img').trigger('click');
   }
 });
+
