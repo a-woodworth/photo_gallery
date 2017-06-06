@@ -6,7 +6,7 @@ var $close_btn =
   var $arrowLeft =
   $('<button class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>');
 var $arrowRight =
-  $('<button class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
+  $('<button id="nxt" class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
 var imageLocation;
@@ -133,8 +133,34 @@ $close_btn.click(function() {
 });
 
 // Go to next overlay image
-$arrowRight.on('click', function() {
-  $(currentImage).removeClass('active');
+$arrowRight.click(function() {
+  nextSelectedImage();
+});
+
+// Go to previous overlay image
+$arrowLeft.click(function() {
+  prevSelectedImage();
+});
+
+// Go to previous and next images via arrow keys
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        prevSelectedImage();
+        break;
+
+        case 39: // right
+        nextSelectedImage();
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action
+});
+
+// Create functions so you can cycle to next image via next button or right arrow key
+function nextSelectedImage() {
+  currentImage = $(currentImage).removeClass('active');
 
   // If last image, go to first image
   if (index === (imageCache.length - 1)) {
@@ -145,12 +171,10 @@ $arrowRight.on('click', function() {
     index = index + 1;
     nextImage = $(imageCache[index]).find('img').trigger('click');
   }
-  currentImage = $(imageCache).filter('.active');
-});
+}
 
-// Go to previous overlay image
-$arrowLeft.on('click', function() {
-  $(currentImage).removeClass('active');
+function prevSelectedImage() {
+  currentImage = $(currentImage).removeClass('active');
 
   // If first image, go to last image
   if (index === 0) {
@@ -161,5 +185,5 @@ $arrowLeft.on('click', function() {
     index = index - 1;
     prevImage = $(imageCache[index]).closest('li').find('img').trigger('click');
   }
-});
+}
 
