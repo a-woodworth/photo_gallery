@@ -18,33 +18,6 @@ var nextImage;
 var prevImage;
 var searchResults;
 
-
-//=============== Search Function ===============
-
-// Add search capability
-$(function() {
-  $('#gallery img').each(function() {
-    $(this).prop('alt').toLowerCase();
-  });
-});
-
-$('#search').on('keyup', function() {
-  searchResults = [];
-  var query = $(this).val().toLowerCase();
-    $('#gallery img').each(function(){
-      console.log(query);
-      if ( $(this).prop('alt').toLowerCase().indexOf(query) >= 0 ||
-          query.length < 1 ) {
-        $(this).parent().parent().show().addClass('search_results');
-        searchResults.push(this.closest('li'));
-      } else {
-        $(this).parent().parent().hide();
-      }
-    });
-  return searchResults;
-});
-
-
 //=============== Create Gallery ===============
 
 // Create list to display all photo thumbnails
@@ -120,17 +93,15 @@ $('#photo_list a').click(function(event) {
   // Show the overlay
   $overlay.show();
 
+  // Set scroll position
   var display = $(window).scrollTop();
     $(window).scroll(function() {
     $(window).scrollTop(display);
   });
 });
 
-// Remove overlay
-$close_btn.click(function() {
-  $('#overlay').hide();
-  $(window).off('scroll');
-});
+
+//============ Overlay/Lightbox Buttons =============
 
 // Go to next overlay image
 $arrowRight.click(function() {
@@ -142,24 +113,37 @@ $arrowLeft.click(function() {
   prevSelectedImage();
 });
 
-// Go to previous and next images via arrow keys
+// Go to previous and next images via arrow keys. Use esc to close overlay.
 $(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-        prevSelectedImage();
-        break;
+  switch(e.which) {
+      case 37: // prev with left arrow
+      prevSelectedImage();
+      break;
 
-        case 39: // right
-        nextSelectedImage();
-        break;
+      case 39: // next with right arrow
+      nextSelectedImage();
+      break;
 
-        default: return; // exit this handler for other keys
-    }
-    e.preventDefault(); // prevent the default action
+      case 27: // close with esc
+      closeSelectedImage();
+      break;
+
+      default: return; // exit this handler for other keys
+  }
+  e.preventDefault(); // prevent the default action
 });
 
-// Create functions so you can cycle to next image via next button or right arrow key
+// Remove overlay
+$close_btn.click(function() {
+  closeSelectedImage();
+});
+
+
+//=============== Functions ===============
+
+// Get next image
 function nextSelectedImage() {
+  imageCache = $(imageCache);
   currentImage = $(currentImage).removeClass('active');
 
   // If last image, go to first image
@@ -173,7 +157,9 @@ function nextSelectedImage() {
   }
 }
 
+// Get previous image
 function prevSelectedImage() {
+  imageCache = $(imageCache);
   currentImage = $(currentImage).removeClass('active');
 
   // If first image, go to last image
@@ -186,4 +172,36 @@ function prevSelectedImage() {
     prevImage = $(imageCache[index]).closest('li').find('img').trigger('click');
   }
 }
+
+// Close overlay
+function closeSelectedImage() {
+  $('#overlay').hide();
+  $(window).off('scroll');
+}
+
+
+//=============== Search Function ===============
+
+// Add search capability
+$(function() {
+  $('#gallery img').each(function() {
+    $(this).prop('alt').toLowerCase();
+  });
+});
+
+$('#search').on('keyup', function() {
+  searchResults = [];
+  var query = $(this).val().toLowerCase();
+    $('#gallery img').each(function(){
+      console.log(query);
+      if ( $(this).prop('alt').toLowerCase().indexOf(query) >= 0 ||
+          query.length < 1 ) {
+        $(this).parent().parent().show().addClass('search_results');
+        searchResults.push(this.closest('li'));
+      } else {
+        $(this).parent().parent().hide();
+      }
+    });
+  return searchResults;
+});
 
