@@ -75,7 +75,7 @@ $('#photo_list a').click(function(event) {
   currentImage = $(this).closest('li').addClass('active');
 
   // Cache all images
-  imageCache = $('#gallery li') //.toArray();
+  imageCache = $('#gallery li');
 
   // Get index position
   index = $(imageCache).filter('.active').index();
