@@ -199,7 +199,7 @@ $('#search').on('keyup', function() {
         $(this).parent().parent().show().addClass('search_results');
         searchResults.push(this.closest('li'));
       } else {
-        $(this).parent().parent().hide();
+        $(this).parent().parent().hide().removeClass('search_results');
       }
     });
   return searchResults;
