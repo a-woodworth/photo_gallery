@@ -9,7 +9,7 @@ var $arrowRight =
   $('<button id="nxt" class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
-var $video = $('<iframe width="560" height="315" src="https://www.youtube.com/embed/81ZtmBAA_NE?list=RD81ZtmBAA_NE?&autoplay=1" frameborder="0" allowfullscreen></iframe>');
+var $video = $('<iframe width="560" height="315" src="https://www.youtube.com/embed/N-YuSKeFMxY?&autoplay=1" frameborder="0" allowfullscreen></iframe>');
 var imageLocation;
 var currentImage;
 var captionText;
@@ -72,7 +72,7 @@ videoBtn.appendChild(videoIconSpan);
 document.querySelector('#gallery').appendChild(videoBtn);
 
 
-//=============== Overlay/Lightbox ===============
+//=============== Images Lightbox ===============
 
 // Add overlay
 $('body').append($overlay);
@@ -123,20 +123,46 @@ $('#photo_list a').click(function(event) {
   });
 });
 
+
+//=============== Video Lightbox ===============
+
 // Activate video from button click
 $('#video_button').on('click', function() {
 
   // Add overlay
   $('body').append($overlay);
+
+  // Hide elements not needed on video overlay
   $img.hide();
   $caption.hide();
   $arrowRight.hide();
   $arrowLeft.hide();
+
+  // Add wrapper to iframe to make video responsive
   $overlay.append($modal);
-  $modal.append($video);
+  var wrapper = $('<div class="video_wrapper"></div>');
+  $modal.append(wrapper);
+  wrapper.append($video).addClass('video_wrapper');
+
+  // Bring close button up so it sits on new wrapper div
+  wrapper.append($close_btn);
 
   // Show the overlay
   $overlay.show();
+
+  // Stop video if close button clicked before video has finished
+  $close_btn.click(function() {
+    $('.video_wrapper').remove();
+    closeSelectedImage();
+
+    // Turn other overlay elements back on
+    $img.show();
+    $caption.show();
+    $arrowRight.show();
+    $arrowLeft.show();
+  });
+  // Return close button to modal
+  $modal.append($close_btn);
 });
 
 
