@@ -9,6 +9,7 @@ var $arrowRight =
   $('<button id="nxt" class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
 var $img = $('<img>');
 var $caption = $('<p></p>');
+var $video = $('<iframe width="560" height="315" src="https://www.youtube.com/embed/81ZtmBAA_NE?list=RD81ZtmBAA_NE?&autoplay=1" frameborder="0" allowfullscreen></iframe>');
 var imageLocation;
 var currentImage;
 var captionText;
@@ -47,6 +48,28 @@ for (var i = 0; i < photos.length; i++) {
 }
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
+
+// Add button for video
+var videoBtn = document.createElement('button');
+videoBtn.id = 'video_button';
+videoBtn.className = 'animate';
+
+// Add music note icon in span
+var videoBtnIcon = document.createElement('i');
+videoBtnIcon.className = 'fa fa-music';
+videoBtnIcon.setAttribute('aria-hidden', 'true');
+
+var videoIconSpan = document.createElement('span');
+videoIconSpan.appendChild(videoBtnIcon);
+videoIconSpan.className = 'musicnotes';
+
+// Add button text
+var videoBtnText = document.createTextNode('Too relaxed? Wake up!');
+videoIconSpan.appendChild(videoBtnText);
+videoBtn.appendChild(videoBtnText);
+videoBtn.appendChild(videoIconSpan);
+
+document.querySelector('#gallery').appendChild(videoBtn);
 
 
 //=============== Overlay/Lightbox ===============
@@ -98,6 +121,22 @@ $('#photo_list a').click(function(event) {
     $(window).scroll(function() {
     $(window).scrollTop(display);
   });
+});
+
+// Activate video from button click
+$('#video_button').on('click', function() {
+
+  // Add overlay
+  $('body').append($overlay);
+  $img.hide();
+  $caption.hide();
+  $arrowRight.hide();
+  $arrowLeft.hide();
+  $overlay.append($modal);
+  $modal.append($video);
+
+  // Show the overlay
+  $overlay.show();
 });
 
 
@@ -204,4 +243,3 @@ $('#search').on('keyup', function() {
     });
   return searchResults;
 });
-

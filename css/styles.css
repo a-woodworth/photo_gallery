@@ -169,3 +169,32 @@ ____________________________________________________________________*/
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+#video_button {
+  position: relative;
+  margin-bottom: 60px;
+  padding: 15px 40px;
+  border-radius: 10px;
+  font-size: 1.4em;
+  font-weight: 300;
+  color: #FFF;
+  text-decoration: none;
+  background-color: #E74C3C;
+  border-bottom: 5px solid #BD3E31;
+  text-shadow: 0px -2px #BD3E31;
+}
+
+#video_button:active {
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
+
+.animate {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.musicnotes {
+  padding-left: 6px;
+}
