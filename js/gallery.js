@@ -35,17 +35,16 @@ for (var i = 0; i < photos.length; i++) {
   photoThumb.className = 'photo_thumbnail';
   photoThumb.src = 'Photos/Thumbnails/' + photos[i].thumbnail;
   photoThumb.alt =  photos[i].caption;
-  //console.log(photoThumb);
 
   var photoLink = document.createElement('a');
   photoLink.setAttribute('href', 'Photos/' + photos[i].image);
-  //console.log(photoLink);
 
 // Build photo gallery
   photoLink.appendChild(photoThumb);
   photoList.appendChild(photoLink);
   photoDisplay.appendChild(photoList);
 }
+
 // Add list to existing gallery div
 document.querySelector('#gallery').appendChild(photoDisplay);
 
